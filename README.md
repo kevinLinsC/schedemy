@@ -20,7 +20,7 @@ Certifique-se de ter as seguintes ferramentas instaladas e configuradas em sua m
 1. Certifique-se de que o serviço do **MySQL** está iniciado na porta `3306`.
 2. Execute o script de criação do banco de dados localizado no caminho:
    ```text
-   ./schedemy-main/schedemy-main/schedemy/db/db_schedemy.sql
+   ./schedemy-main/schedemy/db/db_schedemy.sql
    ```
 
 > ⚠️ **Nota:** A configuração padrão do projeto espera um usuário do MySQL **sem senha**.
@@ -31,14 +31,14 @@ Certifique-se de ter as seguintes ferramentas instaladas e configuradas em sua m
 Navegue até o diretório do projeto e execute o comando do Maven para instalar as dependências e compilar a aplicação:
 
 ```bash
-cd ./schedemy-main/schedemy-main/schedemy
+cd ./schedemy-main/schedemy
 mvn clean install
 ```
 
 ---
 
 ### 3. Execução da Aplicação
-No mesmo diretório (`./schedemy-main/schedemy-main/schedemy`), execute o seguinte comando para iniciar o servidor Spring Boot:
+No mesmo diretório (`./schedemy-main/schedemy`), execute o seguinte comando para iniciar o servidor Spring Boot:
 
 ```bash
 mvn spring-boot:run
