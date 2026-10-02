@@ -5,6 +5,7 @@ import RotaProtegida from "./components/layout/RotaProtegida";
 import AppLayout from "./components/layout/AppLayout";
 
 import LoginPage from "./pages/LoginPage";
+import CadastroPage from "./pages/CadastroPage";
 import DashboardPage from "./pages/DashboardPage";
 import UsuariosPage from "./pages/UsuariosPage";
 import DuracoesPage from "./pages/DuracoesPage";
@@ -21,6 +22,7 @@ export default function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/login" element={<LoginPage />} />
+            <Route path="/cadastro" element={<CadastroPage />} />
 
             <Route
               path="/"

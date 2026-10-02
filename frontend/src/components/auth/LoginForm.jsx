@@ -1,19 +1,9 @@
 import { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuth, CONTAS_PADRAO } from "../../context/AuthContext";
 import { useToast } from "../../context/ToastContext";
-
-/** Ícone oficial da Microsoft (quatro quadrados). */
-function MicrosoftIcon(props) {
-  return (
-    <svg viewBox="0 0 23 23" aria-hidden="true" {...props}>
-      <rect x="1" y="1" width="10" height="10" fill="#f25022" />
-      <rect x="12" y="1" width="10" height="10" fill="#7fba00" />
-      <rect x="1" y="12" width="10" height="10" fill="#00a4ef" />
-      <rect x="12" y="12" width="10" height="10" fill="#ffb900" />
-    </svg>
-  );
-}
+import CampoSenha from "./CampoSenha";
+import MicrosoftIcon from "./MicrosoftIcon";
 
 export default function LoginForm({ className = "" }) {
   const { entrar, carregando, erro } = useAuth();
@@ -23,7 +13,6 @@ export default function LoginForm({ className = "" }) {
 
   const [identificador, setIdentificador] = useState("");
   const [senha, setSenha] = useState("");
-  const [mostrarSenha, setMostrarSenha] = useState(false);
 
   async function aoSubmeter(e) {
     e.preventDefault();
@@ -77,36 +66,11 @@ export default function LoginForm({ className = "" }) {
               Esqueceu sua senha?
             </button>
           </div>
-          <div className="relative">
-            <input
-              id="senha"
-              className="field-input pr-11"
-              type={mostrarSenha ? "text" : "password"}
-              autoComplete="current-password"
-              value={senha}
-              onChange={(e) => setSenha(e.target.value)}
-              placeholder="••••••••"
-              required
-            />
-            <button
-              type="button"
-              onClick={() => setMostrarSenha((v) => !v)}
-              className="absolute inset-y-0 right-0 flex w-10 items-center justify-center text-ink-700/50 transition hover:text-brand-600"
-              aria-label={mostrarSenha ? "Ocultar senha" : "Mostrar senha"}
-            >
-              {mostrarSenha ? (
-                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-                  <path d="M3 3l18 18M10.6 10.6a2 2 0 002.8 2.8" />
-                  <path d="M6.7 6.8C4.6 8.1 3 10 2 12c2 4 6 7 10 7 1.8 0 3.4-.5 4.9-1.4M19.5 16c1-1.1 1.9-2.5 2.5-4-2-4-6-7-10-7-.8 0-1.6.1-2.3.3" />
-                </svg>
-              ) : (
-                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-                  <path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7-10-7-10-7z" />
-                  <circle cx="12" cy="12" r="2.6" />
-                </svg>
-              )}
-            </button>
-          </div>
+          <CampoSenha
+            id="senha"
+            value={senha}
+            onChange={(e) => setSenha(e.target.value)}
+          />
         </div>
 
         {erro && (
@@ -140,13 +104,9 @@ export default function LoginForm({ className = "" }) {
 
         <p className="text-center text-sm text-ink-700/70">
           Não tem uma conta?{" "}
-          <button
-            type="button"
-            onClick={() => toast.info("As contas são criadas pela coordenação do curso.")}
-            className="font-medium text-brand-600 underline underline-offset-4"
-          >
-            Solicite o acesso
-          </button>
+          <Link to="/cadastro" className="font-medium text-brand-600 underline underline-offset-4">
+            Cadastre-se
+          </Link>
         </p>
       </div>
 
