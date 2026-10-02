@@ -26,7 +26,7 @@ export default function LoginForm({ className = "" }) {
   }
 
   return (
-    <form onSubmit={aoSubmeter} className={`flex flex-col gap-6 ${className}`}>
+    <form onSubmit={aoSubmeter} className={`flex flex-col gap-4 sm:gap-5 ${className}`}>
       <div className="flex flex-col items-center gap-1 text-center">
         <h1 className="font-display text-2xl font-bold text-ink-900">Entre na sua conta</h1>
         <p className="text-balance text-sm text-ink-700/70">
@@ -34,7 +34,7 @@ export default function LoginForm({ className = "" }) {
         </p>
       </div>
 
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-3.5">
         <div>
           <label htmlFor="email" className="field-label">
             E-mail institucional
@@ -110,8 +110,10 @@ export default function LoginForm({ className = "" }) {
         </p>
       </div>
 
-      <div className="border-t border-ink-100 pt-4">
-        <p className="mb-2 text-center text-[11px] font-semibold uppercase tracking-wide text-ink-700/50">
+      {/* Atalho de desenvolvimento: em telas sem altura sobrando ele cede
+          espaco para o formulario, que e o que importa ali. */}
+      <div className="hidden border-t border-ink-100 pt-3 [@media(min-height:660px)]:block">
+        <p className="mb-1.5 text-center text-[11px] font-semibold uppercase tracking-wide text-ink-700/50">
           Contas de teste
         </p>
         <div className="flex flex-wrap justify-center gap-1.5">
@@ -121,7 +123,7 @@ export default function LoginForm({ className = "" }) {
               type="button"
               onClick={() => usarConta(conta)}
               title={conta.papel}
-              className="rounded-full border border-ink-100 bg-ink-50 px-3 py-1 text-xs font-medium text-ink-800 transition hover:border-brand-400 hover:text-brand-700"
+              className="rounded-full border border-ink-100 bg-ink-50 px-2.5 py-0.5 text-xs font-medium text-ink-800 transition hover:border-brand-400 hover:text-brand-700"
             >
               {conta.usuario}
             </button>

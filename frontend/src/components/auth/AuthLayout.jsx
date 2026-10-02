@@ -8,7 +8,7 @@ export default function AuthLayout({ children }) {
   return (
     <div className="grid min-h-screen lg:grid-cols-2">
       {/* Coluna do formulário */}
-      <div className="flex flex-col gap-4 p-6 md:p-10">
+      <div className="flex flex-col gap-3 p-4 sm:p-6 lg:gap-4 [@media(min-height:820px)]:lg:p-10">
         <div className="flex justify-center gap-2 md:justify-start">
           <Link to="/login" className="flex items-center gap-2 font-medium text-ink-900">
             <img
@@ -21,7 +21,7 @@ export default function AuthLayout({ children }) {
           </Link>
         </div>
 
-        <div className="flex flex-1 items-center justify-center py-6">
+        <div className="flex flex-1 items-center justify-center py-2 [@media(min-height:820px)]:py-6">
           <div className="w-full max-w-sm">{children}</div>
         </div>
 

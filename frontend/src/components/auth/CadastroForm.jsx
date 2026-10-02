@@ -78,7 +78,7 @@ export default function CadastroForm({ className = "" }) {
   }
 
   return (
-    <form onSubmit={aoSubmeter} noValidate className={`flex flex-col gap-6 ${className}`}>
+    <form onSubmit={aoSubmeter} noValidate className={`flex flex-col gap-4 sm:gap-5 ${className}`}>
       <div className="flex flex-col items-center gap-1 text-center">
         <h1 className="font-display text-2xl font-bold text-ink-900">Crie sua conta</h1>
         <p className="text-balance text-sm text-ink-700/70">
@@ -86,7 +86,7 @@ export default function CadastroForm({ className = "" }) {
         </p>
       </div>
 
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-3">
         <div>
           <label htmlFor="nome" className="field-label">
             Nome completo
@@ -122,7 +122,7 @@ export default function CadastroForm({ className = "" }) {
           {erros.email ? (
             <p className="field-error">{erros.email}</p>
           ) : (
-            <p className="mt-1 text-[11.5px] text-ink-700/60">
+            <p className="mt-0.5 text-[11.5px] leading-snug text-ink-700/60">
               Usaremos este endereço para enviar as confirmações de agendamento.
             </p>
           )}
@@ -142,7 +142,7 @@ export default function CadastroForm({ className = "" }) {
           {erros.senha ? (
             <p className="field-error">{erros.senha}</p>
           ) : (
-            <p className="mt-1 text-[11.5px] text-ink-700/60">
+            <p className="mt-0.5 text-[11.5px] leading-snug text-ink-700/60">
               Deve ter no mínimo {SENHA_MIN} caracteres.
             </p>
           )}
@@ -159,11 +159,7 @@ export default function CadastroForm({ className = "" }) {
             onChange={(e) => alterar("confirmacao", e.target.value)}
             invalido={!!erros.confirmacao}
           />
-          {erros.confirmacao ? (
-            <p className="field-error">{erros.confirmacao}</p>
-          ) : (
-            <p className="mt-1 text-[11.5px] text-ink-700/60">Repita a senha para confirmar.</p>
-          )}
+          {erros.confirmacao && <p className="field-error">{erros.confirmacao}</p>}
         </div>
 
         {erroGeral && (
@@ -186,7 +182,7 @@ export default function CadastroForm({ className = "" }) {
         <span className="h-px flex-1 bg-ink-100" />
       </div>
 
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-3">
         <button
           type="button"
           className="btn-outline w-full"
