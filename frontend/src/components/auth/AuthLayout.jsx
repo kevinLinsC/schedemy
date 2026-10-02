@@ -51,7 +51,7 @@ export default function AuthLayout({ children }) {
             Schedemy
           </h2>
           <p className="mt-3 max-w-sm text-balance text-base leading-relaxed text-white/90 drop-shadow">
-            Agendamentos acadêmicos organizados em um só lugar — alunos, professores,
+            Agendamentos acadêmicos organizados em um só lugar alunos, professores,
             coordenação e recepção.
           </p>
         </div>
