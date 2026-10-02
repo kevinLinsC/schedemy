@@ -4,6 +4,7 @@ import { agendamentosApi } from "../../api/agendamentos";
 import { usePaginatedList } from "../../hooks/usePaginatedList";
 import { useUsuariosOptions } from "../../hooks/useUsuariosOptions";
 import { useToast } from "../../context/ToastContext";
+import { useAuth } from "../../context/AuthContext";
 import PageHeader from "../../components/ui/PageHeader";
 import Table from "../../components/ui/Table";
 import Pagination from "../../components/ui/Pagination";
@@ -16,6 +17,7 @@ import AgendamentoDetailModal from "./AgendamentoDetailModal";
 
 export default function AgendamentosPage() {
   const toast = useToast();
+  const { pode } = useAuth();
   const [searchParams, setSearchParams] = useSearchParams();
   const { usuarios } = useUsuariosOptions();
 
@@ -27,7 +29,9 @@ export default function AgendamentosPage() {
     ordenarPor: "dataReuniao,desc",
   });
 
-  const [modalNovoAberto, setModalNovoAberto] = useState(searchParams.get("novo") === "1");
+  const [modalNovoAberto, setModalNovoAberto] = useState(
+    searchParams.get("novo") === "1" && pode("agendamentos.criar")
+  );
   const [detalhe, setDetalhe] = useState(null);
 
   function abrirNovo() {
@@ -69,9 +73,11 @@ export default function AgendamentosPage() {
         titulo="Agendamentos"
         subtitulo="Solicitações e reuniões marcadas entre alunos, professores e coordenadores."
         acao={
-          <button className="btn-accent" onClick={abrirNovo}>
-            + Novo agendamento
-          </button>
+          pode("agendamentos.criar") ? (
+            <button className="btn-accent" onClick={abrirNovo}>
+              + Novo agendamento
+            </button>
+          ) : null
         }
       />
 

@@ -12,7 +12,7 @@ import Pill from "../components/ui/Pill";
 const STATUS_RESUMO = ["PENDENTE", "AGUARDANDO_RESPOSTA", "CONFIRMADO", "CONCLUIDO", "CANCELADO"];
 
 export default function DashboardPage() {
-  const { perfilVinculado } = useAuth();
+  const { perfilVinculado, pode } = useAuth();
   const [contagens, setContagens] = useState(null);
   const [totalUsuarios, setTotalUsuarios] = useState(null);
   const [proximos, setProximos] = useState([]);
@@ -76,9 +76,11 @@ export default function DashboardPage() {
             <div className="card lg:col-span-2">
               <div className="flex items-center justify-between border-b border-ink-100 px-5 py-4">
                 <h2 className="font-display text-lg text-ink-900">Próximos agendamentos</h2>
-                <Link to="/agendamentos" className="text-sm font-medium text-brand-700 hover:underline">
-                  Ver todos →
-                </Link>
+                {pode("agendamentos.ver") && (
+                  <Link to="/agendamentos" className="text-sm font-medium text-brand-700 hover:underline">
+                    Ver todos →
+                  </Link>
+                )}
               </div>
               {proximos.length === 0 ? (
                 <p className="px-5 py-8 text-sm text-ink-700/70">Nenhum agendamento cadastrado ainda.</p>
@@ -100,20 +102,26 @@ export default function DashboardPage() {
             </div>
 
             <div className="card p-5">
-              <h2 className="font-display text-lg text-ink-900">Cadastro geral</h2>
-              <div className="mt-4 space-y-3 text-sm">
-                <div className="flex items-center justify-between">
-                  <span className="text-ink-700/70">Usuários cadastrados</span>
-                  <span className="font-semibold text-ink-900">{totalUsuarios ?? "—"}</span>
+              <h2 className="font-display text-lg text-ink-900">Ações rápidas</h2>
+              {pode("usuarios.gerenciar") && (
+                <div className="mt-4 space-y-3 text-sm">
+                  <div className="flex items-center justify-between">
+                    <span className="text-ink-700/70">Usuários cadastrados</span>
+                    <span className="font-semibold text-ink-900">{totalUsuarios ?? "—"}</span>
+                  </div>
                 </div>
-              </div>
+              )}
               <div className="mt-5 grid grid-cols-2 gap-2">
-                <Link to="/agendamentos?novo=1" className="btn-accent justify-center">
-                  + Agendamento
-                </Link>
-                <Link to="/usuarios" className="btn-ghost justify-center border border-ink-100">
-                  + Usuário
-                </Link>
+                {pode("agendamentos.criar") && (
+                  <Link to="/agendamentos?novo=1" className="btn-accent justify-center">
+                    + Agendamento
+                  </Link>
+                )}
+                {pode("usuarios.gerenciar") && (
+                  <Link to="/usuarios" className="btn-ghost justify-center border border-ink-100">
+                    + Usuário
+                  </Link>
+                )}
               </div>
             </div>
           </div>

@@ -1,22 +1,26 @@
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { CORES_TIPO_USUARIO } from "../../utils/domain";
+import { ROTULOS_PERFIL } from "../../utils/permissoes";
 import Pill from "../ui/Pill";
 
+// `permissao: null` significa visível para qualquer usuário autenticado.
 const ITENS_NAV = [
-  { to: "/", rotulo: "Painel", fim: true, icone: IconeGrid },
-  { to: "/agendamentos", rotulo: "Agendamentos", icone: IconeCalendario },
-  { to: "/disponibilidades", rotulo: "Disponibilidades", icone: IconeRelogio },
-  { to: "/bloqueios", rotulo: "Bloqueios de período", icone: IconeBloqueio },
-  { to: "/duracoes", rotulo: "Durações de reunião", icone: IconeTimer },
-  { to: "/usuarios", rotulo: "Usuários", icone: IconePessoas },
-  { to: "/avaliacoes", rotulo: "Avaliações", icone: IconeEstrela },
-  { to: "/notificacoes", rotulo: "Notificações", icone: IconeSino },
+  { to: "/", rotulo: "Painel", fim: true, icone: IconeGrid, permissao: null },
+  { to: "/agendamentos", rotulo: "Agendamentos", icone: IconeCalendario, permissao: "agendamentos.ver" },
+  { to: "/disponibilidades", rotulo: "Disponibilidades", icone: IconeRelogio, permissao: "disponibilidades.gerenciar" },
+  { to: "/bloqueios", rotulo: "Bloqueios de período", icone: IconeBloqueio, permissao: "bloqueios.gerenciar" },
+  { to: "/duracoes", rotulo: "Durações de reunião", icone: IconeTimer, permissao: "duracoes.gerenciar" },
+  { to: "/usuarios", rotulo: "Usuários", icone: IconePessoas, permissao: "usuarios.gerenciar" },
+  { to: "/avaliacoes", rotulo: "Avaliações", icone: IconeEstrela, permissao: "avaliacoes.ver" },
+  { to: "/notificacoes", rotulo: "Notificações", icone: IconeSino, permissao: "notificacoes.ver" },
 ];
 
 export default function AppLayout() {
-  const { auth, perfilVinculado, sair } = useAuth();
+  const { auth, perfilVinculado, perfil, pode, sair } = useAuth();
   const navigate = useNavigate();
+
+  const itensVisiveis = ITENS_NAV.filter((item) => !item.permissao || pode(item.permissao));
 
   function aoSair() {
     sair();
@@ -40,7 +44,7 @@ export default function AppLayout() {
         </div>
 
         <nav className="flex-1 space-y-0.5 px-3">
-          {ITENS_NAV.map((item) => (
+          {itensVisiveis.map((item) => (
             <NavLink
               key={item.to}
               to={item.to}
@@ -66,9 +70,9 @@ export default function AppLayout() {
               <p className="truncate text-sm font-medium text-ink-900">
                 {perfilVinculado?.nome || auth?.username}
               </p>
-              {perfilVinculado?.tipoUsuario && (
-                <Pill className={CORES_TIPO_USUARIO[perfilVinculado.tipoUsuario]}>
-                  {perfilVinculado.tipoUsuario}
+              {perfil && (
+                <Pill className={CORES_TIPO_USUARIO[perfil] || "bg-ink-900 text-white"}>
+                  {ROTULOS_PERFIL[perfil] || perfil}
                 </Pill>
               )}
             </div>

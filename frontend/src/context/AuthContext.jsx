@@ -1,6 +1,7 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
 import { getStoredAuth, setStoredAuth } from "../api/client";
 import { usuariosApi } from "../api/usuarios";
+import { derivarPerfil, perfilPode } from "../utils/permissoes";
 
 const AuthContext = createContext(null);
 
@@ -76,18 +77,23 @@ export function AuthProvider({ children }) {
     [auth]
   );
 
+  const perfil = useMemo(() => derivarPerfil(auth, perfilVinculado), [auth, perfilVinculado]);
+  const pode = useCallback((permissao) => perfilPode(perfil, permissao), [perfil]);
+
   const valor = useMemo(
     () => ({
       auth,
       estaAutenticado: !!auth,
       perfilVinculado,
+      perfil,
+      pode,
       carregando,
       erro,
       entrar,
       sair,
       vincularPerfil,
     }),
-    [auth, perfilVinculado, carregando, erro, entrar, sair, vincularPerfil]
+    [auth, perfilVinculado, perfil, pode, carregando, erro, entrar, sair, vincularPerfil]
   );
 
   return <AuthContext.Provider value={valor}>{children}</AuthContext.Provider>;

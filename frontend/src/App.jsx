@@ -33,13 +33,62 @@ export default function App() {
               }
             >
               <Route index element={<DashboardPage />} />
-              <Route path="usuarios" element={<UsuariosPage />} />
-              <Route path="duracoes" element={<DuracoesPage />} />
-              <Route path="disponibilidades" element={<DisponibilidadesPage />} />
-              <Route path="bloqueios" element={<BloqueiosPage />} />
-              <Route path="agendamentos" element={<AgendamentosPage />} />
-              <Route path="avaliacoes" element={<AvaliacoesPage />} />
-              <Route path="notificacoes" element={<NotificacoesPage />} />
+              <Route
+                path="usuarios"
+                element={
+                  <RotaProtegida permissao="usuarios.gerenciar">
+                    <UsuariosPage />
+                  </RotaProtegida>
+                }
+              />
+              <Route
+                path="duracoes"
+                element={
+                  <RotaProtegida permissao="duracoes.gerenciar">
+                    <DuracoesPage />
+                  </RotaProtegida>
+                }
+              />
+              <Route
+                path="disponibilidades"
+                element={
+                  <RotaProtegida permissao="disponibilidades.gerenciar">
+                    <DisponibilidadesPage />
+                  </RotaProtegida>
+                }
+              />
+              <Route
+                path="bloqueios"
+                element={
+                  <RotaProtegida permissao="bloqueios.gerenciar">
+                    <BloqueiosPage />
+                  </RotaProtegida>
+                }
+              />
+              <Route
+                path="agendamentos"
+                element={
+                  <RotaProtegida permissao="agendamentos.ver">
+                    <AgendamentosPage />
+                  </RotaProtegida>
+                }
+              />
+              <Route
+                path="avaliacoes"
+                element={
+                  <RotaProtegida permissao="avaliacoes.ver">
+                    <AvaliacoesPage />
+                  </RotaProtegida>
+                }
+              />
+              <Route
+                path="notificacoes"
+                element={
+                  <RotaProtegida permissao="notificacoes.ver">
+                    <NotificacoesPage />
+                  </RotaProtegida>
+                }
+              />
             </Route>
           </Routes>
         </BrowserRouter>

@@ -3,6 +3,7 @@ import { avaliacoesApi } from "../api/avaliacoes";
 import { usePaginatedList } from "../hooks/usePaginatedList";
 import { useUsuariosOptions } from "../hooks/useUsuariosOptions";
 import { useToast } from "../context/ToastContext";
+import { useAuth } from "../context/AuthContext";
 import PageHeader from "../components/ui/PageHeader";
 import Table from "../components/ui/Table";
 import Pagination from "../components/ui/Pagination";
@@ -13,6 +14,7 @@ import { formatarDataHora } from "../utils/format";
 
 export default function AvaliacoesPage() {
   const toast = useToast();
+  const { pode } = useAuth();
   const { usuarios } = useUsuariosOptions("ALUNO");
   const [alunoId, setAlunoId] = useState("");
 
@@ -62,9 +64,12 @@ export default function AvaliacoesPage() {
         titulo="Avaliações"
         subtitulo="Avaliações registradas pelos alunos após reuniões concluídas."
         acao={
-          <button className="btn-accent" onClick={abrirCriacao}>
-            + Nova avaliação
-          </button>
+          // RF 24: apenas o aluno avalia a reunião; a coordenação só acompanha.
+          pode("avaliacoes.criar") ? (
+            <button className="btn-accent" onClick={abrirCriacao}>
+              + Nova avaliação
+            </button>
+          ) : null
         }
       />
 

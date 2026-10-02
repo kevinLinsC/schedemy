@@ -5,11 +5,13 @@ import Pill from "../../components/ui/Pill";
 import { SelectField, TextAreaField } from "../../components/ui/fields";
 import { agendamentosApi } from "../../api/agendamentos";
 import { useToast } from "../../context/ToastContext";
+import { useAuth } from "../../context/AuthContext";
 import { CORES_STATUS_AGENDAMENTO, rotularEnum } from "../../utils/domain";
 import { formatarData, formatarHora } from "../../utils/format";
 
 export default function AgendamentoDetailModal({ agendamento, onFechar, onAlterado }) {
   const toast = useToast();
+  const { pode } = useAuth();
   const [participanteRecusando, setParticipanteRecusando] = useState(null);
   const [motivoRecusa, setMotivoRecusa] = useState("");
   const [respondendo, setRespondendo] = useState(false);
@@ -24,8 +26,14 @@ export default function AgendamentoDetailModal({ agendamento, onFechar, onAltera
 
   if (!agendamento) return null;
   const a = agendamento;
-  const podeCancelar = a.status !== "CANCELADO" && a.status !== "CONCLUIDO";
-  const podeRemover = a.status === "PENDENTE" || a.status === "CANCELADO";
+  // Além do estado do agendamento, cada ação depende da permissão do perfil.
+  const podeCancelar =
+    a.status !== "CANCELADO" && a.status !== "CONCLUIDO" && pode("agendamentos.cancelar");
+  // A remoção definitiva não consta nos casos de uso: fica restrita à administração.
+  const podeRemover =
+    (a.status === "PENDENTE" || a.status === "CANCELADO") && pode("agendamentos.remover");
+  // RF 19: aceitar/recusar convite é do convidado (aluno, professor ou coordenador).
+  const podeResponder = pode("agendamentos.responder");
 
   async function responder(participante, aceitar, motivo) {
     setRespondendo(true);
@@ -135,7 +143,7 @@ export default function AgendamentoDetailModal({ agendamento, onFechar, onAltera
                     <p className="text-xs text-ink-700/60">{rotularEnum(p.papel)}</p>
                   </div>
                   <div className="flex items-center gap-2">
-                    {p.statusResposta === "PENDENTE" && a.status !== "CANCELADO" ? (
+                    {p.statusResposta === "PENDENTE" && a.status !== "CANCELADO" && podeResponder ? (
                       <>
                         <button
                           className="btn-ghost !px-2.5 !py-1 text-xs !text-sage-700 hover:!bg-sage-100"
