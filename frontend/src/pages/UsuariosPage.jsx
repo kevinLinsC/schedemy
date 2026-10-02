@@ -12,7 +12,6 @@ import { TextField, SelectField, FieldGrid } from "../components/ui/fields";
 import { TIPOS_USUARIO, CORES_TIPO_USUARIO } from "../utils/domain";
 
 const FORM_VAZIO = {
-  idMicrosoft: "",
   nome: "",
   email: "",
   telefoneWhatsapp: "",
@@ -49,7 +48,6 @@ export default function UsuariosPage() {
   function abrirEdicao(usuario) {
     setEditando(usuario);
     setForm({
-      idMicrosoft: usuario.idMicrosoft || `sso-${usuario.id}`,
       nome: usuario.nome,
       email: usuario.email,
       telefoneWhatsapp: usuario.telefoneWhatsapp || "",
@@ -67,7 +65,6 @@ export default function UsuariosPage() {
     const novosErros = {};
     if (!form.nome || form.nome.trim().length < 3) novosErros.nome = "Informe ao menos 3 caracteres.";
     if (!form.email || !/^\S+@\S+\.\S+$/.test(form.email)) novosErros.email = "E-mail inválido.";
-    if (!form.idMicrosoft) novosErros.idMicrosoft = "Campo obrigatório.";
     setErros(novosErros);
     return Object.keys(novosErros).length === 0;
   }
@@ -228,31 +225,11 @@ export default function UsuariosPage() {
               onChange={(e) => setForm({ ...form, telefoneWhatsapp: e.target.value })}
             />
           </FieldGrid>
-          <FieldGrid>
+          <FieldGrid colunas={1}>
             <TextField
               label="Matrícula / RA"
               value={form.matriculaRa}
               onChange={(e) => setForm({ ...form, matriculaRa: e.target.value })}
-            />
-            <TextField
-              label="Nº de identificação"
-              placeholder="Ex.: PROF-0098"
-              value={form.numIdentificacao}
-              onChange={(e) => setForm({ ...form, numIdentificacao: e.target.value })}
-            />
-          </FieldGrid>
-          <FieldGrid>
-            <TextField
-              label="Departamento"
-              value={form.departamento}
-              onChange={(e) => setForm({ ...form, departamento: e.target.value })}
-            />
-            <TextField
-              label="ID Microsoft (SSO)"
-              required
-              value={form.idMicrosoft}
-              onChange={(e) => setForm({ ...form, idMicrosoft: e.target.value })}
-              error={erros.idMicrosoft}
             />
           </FieldGrid>
 

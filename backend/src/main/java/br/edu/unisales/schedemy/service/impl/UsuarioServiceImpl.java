@@ -15,10 +15,15 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.UUID;
+
 @Service
 @RequiredArgsConstructor
 @Transactional
 public class UsuarioServiceImpl implements UsuarioService {
+
+    /** Marca usuarios cadastrados manualmente, ainda sem conta Microsoft vinculada. */
+    public static final String PREFIXO_VINCULO_PENDENTE = "pendente-sso:";
 
     private final UsuarioRepository usuarioRepository;
     private final UsuarioMapper usuarioMapper;
@@ -28,12 +33,27 @@ public class UsuarioServiceImpl implements UsuarioService {
         if (usuarioRepository.existsByEmail(dto.email())) {
             throw new RecursoDuplicadoException("Ja existe um usuario cadastrado com o email: " + dto.email());
         }
-        if (usuarioRepository.existsByIdMicrosoft(dto.idMicrosoft())) {
+        boolean temVinculoMicrosoft = dto.idMicrosoft() != null && !dto.idMicrosoft().isBlank();
+        if (temVinculoMicrosoft && usuarioRepository.existsByIdMicrosoft(dto.idMicrosoft())) {
             throw new RecursoDuplicadoException("Ja existe um usuario cadastrado com este idMicrosoft.");
         }
+
         Usuario usuario = usuarioMapper.paraEntidade(dto);
+        if (!temVinculoMicrosoft) {
+            usuario.setIdMicrosoft(gerarVinculoProvisorio());
+        }
         usuario = usuarioRepository.save(usuario);
         return usuarioMapper.paraResponseDTO(usuario);
+    }
+
+    /**
+     * A coluna id_microsoft e NOT NULL e UNIQUE, mas no cadastro manual o vinculo com a
+     * conta Microsoft ainda nao existe (ele so aparece no login via SSO - RF 29/RF 31).
+     * Gera um marcador provisorio, proposital e facil de identificar: quando o SSO entrar,
+     * estes registros precisam ser reconciliados com o idMicrosoft real.
+     */
+    private String gerarVinculoProvisorio() {
+        return PREFIXO_VINCULO_PENDENTE + UUID.randomUUID();
     }
 
     @Override

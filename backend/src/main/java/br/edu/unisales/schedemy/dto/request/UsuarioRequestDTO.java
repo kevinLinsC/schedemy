@@ -6,8 +6,11 @@ import jakarta.validation.constraints.*;
 
 @Schema(description = "Dados para cadastro/atualizacao de usuario")
 public record UsuarioRequestDTO(
-        @Schema(description = "Identificador da conta Microsoft vinculada", example = "111111111")
-        @NotBlank(message = "idMicrosoft e obrigatorio")
+        @Schema(description = "Identificador da conta Microsoft vinculada. Opcional: no cadastro "
+                + "manual o vinculo ainda nao existe (RF 29), entao o sistema gera um valor "
+                + "provisorio. No update, se vier vazio, o valor atual e preservado.",
+                example = "111111111")
+        @Size(max = 255, message = "idMicrosoft deve ter no maximo 255 caracteres")
         String idMicrosoft,
 
         @Schema(example = "Nome")

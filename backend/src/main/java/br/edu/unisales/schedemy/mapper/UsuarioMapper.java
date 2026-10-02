@@ -22,7 +22,10 @@ public class UsuarioMapper {
     }
 
     public void atualizarEntidade(Usuario usuario, UsuarioRequestDTO dto) {
-        usuario.setIdMicrosoft(dto.idMicrosoft());
+        // Vazio significa "nao mexer": o vinculo com a conta Microsoft nao e editado pelo formulario.
+        if (dto.idMicrosoft() != null && !dto.idMicrosoft().isBlank()) {
+            usuario.setIdMicrosoft(dto.idMicrosoft());
+        }
         usuario.setNome(dto.nome());
         usuario.setEmail(dto.email());
         usuario.setTelefoneWhatsapp(dto.telefoneWhatsapp());
