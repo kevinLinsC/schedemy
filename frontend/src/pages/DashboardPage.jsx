@@ -76,7 +76,7 @@ export default function DashboardPage() {
             <div className="card lg:col-span-2">
               <div className="flex items-center justify-between border-b border-ink-100 px-5 py-4">
                 <h2 className="font-display text-lg text-ink-900">Próximos agendamentos</h2>
-                <Link to="/agendamentos" className="text-sm font-medium text-clay-600 hover:underline">
+                <Link to="/agendamentos" className="text-sm font-medium text-brand-700 hover:underline">
                   Ver todos →
                 </Link>
               </div>

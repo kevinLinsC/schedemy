@@ -52,7 +52,7 @@ export function CheckboxField({ label, className = "", ...props }) {
     <label className={`flex items-center gap-2 ${className}`}>
       <input
         type="checkbox"
-        className="h-4 w-4 rounded border-ink-100 text-clay-500 focus:ring-clay-500/40"
+        className="h-4 w-4 rounded border-ink-100 text-brand-600 focus:ring-brand-600/40"
         {...props}
       />
       <span className="text-sm text-ink-800">{label}</span>

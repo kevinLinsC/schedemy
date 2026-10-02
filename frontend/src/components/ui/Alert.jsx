@@ -1,6 +1,6 @@
 const ESTILOS = {
   erro: "border-brick-700/30 bg-brick-100 text-brick-700",
-  aviso: "border-clay-500/30 bg-clay-100 text-clay-600",
+  aviso: "border-brand-600/30 bg-brand-100 text-brand-700",
   sucesso: "border-sage-700/30 bg-sage-100 text-sage-700",
   info: "border-ink-600/25 bg-ink-100 text-ink-800",
 };

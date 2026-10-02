@@ -103,7 +103,7 @@ export default function NovoAgendamentoModal({ aberto, onFechar, onCriado, criar
               <label key={u.id} className="flex cursor-pointer items-center gap-2 rounded-md px-2 py-1.5 hover:bg-ink-50">
                 <input
                   type="checkbox"
-                  className="h-4 w-4 rounded border-ink-100 text-clay-500 focus:ring-clay-500/40"
+                  className="h-4 w-4 rounded border-ink-100 text-brand-600 focus:ring-brand-600/40"
                   checked={convidadosSelecionados.includes(String(u.id))}
                   onChange={() => alternarConvidado(String(u.id))}
                 />

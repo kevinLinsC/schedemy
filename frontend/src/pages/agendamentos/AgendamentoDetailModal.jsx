@@ -118,7 +118,7 @@ export default function AgendamentoDetailModal({ agendamento, onFechar, onAltera
                 href={a.salaVirtual.linkTeams}
                 target="_blank"
                 rel="noreferrer"
-                className="mt-1 block truncate text-sm font-medium text-clay-600 hover:underline"
+                className="mt-1 block truncate text-sm font-medium text-brand-700 hover:underline"
               >
                 {a.salaVirtual.linkTeams}
               </a>

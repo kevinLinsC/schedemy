@@ -21,18 +21,18 @@ body {
 }
 
 ::selection {
-  background: #c9701f;
+  background: #1f5086;
   color: #fff;
 }
 
 ::-webkit-scrollbar { width: 10px; height: 10px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb {
-  background: #d8c9b0;
+  background: #c3d4e6;
   border-radius: 999px;
   border: 2px solid #faf7f1;
 }
-::-webkit-scrollbar-thumb:hover { background: #c9701f; }
+::-webkit-scrollbar-thumb:hover { background: #1f5086; }
 
 @layer components {
   .field-label {
@@ -41,7 +41,7 @@ body {
   .field-input {
     @apply w-full rounded-lg border border-ink-100 bg-white px-3 py-2 text-sm text-ink-900
            placeholder:text-ink-700/40 shadow-sm
-           focus:outline-none focus:ring-2 focus:ring-clay-500/40 focus:border-clay-500 transition;
+           focus:outline-none focus:ring-2 focus:ring-brand-600/40 focus:border-brand-600 transition;
   }
   .field-error {
     @apply mt-1 text-[11.5px] text-brick-700;
@@ -54,7 +54,10 @@ body {
     @apply btn bg-ink-900 text-white hover:bg-ink-800 shadow-soft;
   }
   .btn-accent {
-    @apply btn bg-clay-500 text-white hover:bg-clay-600 shadow-soft;
+    @apply btn bg-brand-600 text-white hover:bg-brand-700 shadow-soft;
+  }
+  .btn-outline {
+    @apply btn border border-ink-100 bg-white text-ink-900 hover:bg-ink-50 hover:border-brand-300 shadow-sm;
   }
   .btn-ghost {
     @apply btn bg-transparent text-ink-700 hover:bg-ink-100;

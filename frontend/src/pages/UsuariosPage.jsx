@@ -259,7 +259,7 @@ export default function UsuariosPage() {
           <label className="flex items-center gap-2 pt-1">
             <input
               type="checkbox"
-              className="h-4 w-4 rounded border-ink-100 text-clay-500 focus:ring-clay-500/40"
+              className="h-4 w-4 rounded border-ink-100 text-brand-600 focus:ring-brand-600/40"
               checked={form.ativo}
               onChange={(e) => setForm({ ...form, ativo: e.target.checked })}
             />

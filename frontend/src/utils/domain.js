@@ -35,7 +35,7 @@ export const TIPOS_OPERACAO_MOTIVO = [
 /** Mapeia o status do agendamento para a classe de cor usada nas pílulas (pill) da UI. */
 export const CORES_STATUS_AGENDAMENTO = {
   PENDENTE: "bg-ink-100 text-ink-800",
-  AGUARDANDO_RESPOSTA: "bg-clay-100 text-clay-600",
+  AGUARDANDO_RESPOSTA: "bg-brand-100 text-brand-700",
   CONFIRMADO: "bg-sage-100 text-sage-700",
   EM_ANDAMENTO: "bg-sage-100 text-sage-700",
   CONCLUIDO: "bg-ink-900 text-white",
@@ -51,7 +51,7 @@ export const CORES_STATUS_ENVIO = {
 export const CORES_TIPO_USUARIO = {
   ALUNO: "bg-ink-100 text-ink-800",
   PROFESSOR: "bg-sage-100 text-sage-700",
-  COORDENADOR: "bg-clay-100 text-clay-600",
+  COORDENADOR: "bg-brand-100 text-brand-700",
   RECEPCIONISTA: "bg-brick-100 text-brick-700",
 };
 
