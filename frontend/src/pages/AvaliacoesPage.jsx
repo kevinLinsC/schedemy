@@ -76,7 +76,7 @@ export default function AvaliacoesPage() {
       <div className="card mb-4 flex flex-wrap items-end gap-3 p-4">
         <SelectField
           label="Aluno"
-          className="w-72"
+          className="w-full sm:w-72"
           placeholder="Selecione um aluno…"
           options={usuarios.map((u) => ({ valor: u.id, rotulo: u.nome }))}
           value={alunoId}

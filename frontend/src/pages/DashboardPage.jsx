@@ -111,14 +111,14 @@ export default function DashboardPage() {
                   </div>
                 </div>
               )}
-              <div className="mt-5 grid grid-cols-2 gap-2">
+              <div className="mt-5 flex flex-wrap gap-2">
                 {pode("agendamentos.criar") && (
-                  <Link to="/agendamentos?novo=1" className="btn-accent justify-center">
+                  <Link to="/agendamentos?novo=1" className="btn-accent flex-1 justify-center whitespace-nowrap">
                     + Agendamento
                   </Link>
                 )}
                 {pode("usuarios.gerenciar") && (
-                  <Link to="/usuarios" className="btn-ghost justify-center border border-ink-100">
+                  <Link to="/usuarios" className="btn-ghost flex-1 justify-center whitespace-nowrap border border-ink-100">
                     + Usuário
                   </Link>
                 )}

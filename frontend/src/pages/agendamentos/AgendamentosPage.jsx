@@ -84,7 +84,7 @@ export default function AgendamentosPage() {
       <div className="card mb-4 flex flex-wrap items-end gap-3 p-4">
         <SelectField
           label="Usuário envolvido"
-          className="w-64"
+          className="w-full sm:w-64"
           placeholder="Todos os agendamentos"
           options={usuarios.map((u) => ({ valor: u.id, rotulo: u.nome }))}
           value={filtros.usuarioId || ""}

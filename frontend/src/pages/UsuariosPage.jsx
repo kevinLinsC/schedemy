@@ -126,13 +126,13 @@ export default function UsuariosPage() {
         <TextField
           label="Buscar por nome"
           placeholder="Ex.: Fernanda"
-          className="w-56"
+          className="w-full sm:w-56"
           value={filtros.nome || ""}
           onChange={(e) => aplicarFiltros({ ...filtros, nome: e.target.value })}
         />
         <SelectField
           label="Tipo"
-          className="w-48"
+          className="w-full sm:w-48"
           placeholder="Todos os tipos"
           options={TIPOS_USUARIO}
           value={filtros.tipo || ""}
@@ -140,7 +140,7 @@ export default function UsuariosPage() {
         />
         <SelectField
           label="Status"
-          className="w-40"
+          className="w-full sm:w-40"
           placeholder="Todos"
           options={[
             { valor: "true", rotulo: "Ativos" },

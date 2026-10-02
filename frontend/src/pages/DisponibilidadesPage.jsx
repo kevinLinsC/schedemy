@@ -115,7 +115,7 @@ export default function DisponibilidadesPage() {
       <div className="card mb-4 flex flex-wrap items-end gap-3 p-4">
         <SelectField
           label="Professor / coordenador"
-          className="w-64"
+          className="w-full sm:w-64"
           placeholder="Todos"
           options={docentes.map((u) => ({ valor: u.id, rotulo: u.nome }))}
           value={filtros.usuarioId || ""}
@@ -123,7 +123,7 @@ export default function DisponibilidadesPage() {
         />
         <SelectField
           label="Dia da semana"
-          className="w-48"
+          className="w-full sm:w-48"
           placeholder="Todos"
           options={DIAS_SEMANA.map((d) => ({ valor: d.valor, rotulo: d.rotulo }))}
           value={filtros.diaSemana || ""}

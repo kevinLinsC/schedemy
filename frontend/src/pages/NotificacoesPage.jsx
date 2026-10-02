@@ -39,7 +39,7 @@ export default function NotificacoesPage() {
       <div className="card mb-4 flex flex-wrap items-end gap-3 p-4">
         <SelectField
           label="Usuário"
-          className="w-64"
+          className="w-full sm:w-64"
           placeholder="Todos"
           options={usuarios.map((u) => ({ valor: u.id, rotulo: u.nome }))}
           value={filtros.usuarioId || ""}
@@ -47,7 +47,7 @@ export default function NotificacoesPage() {
         />
         <SelectField
           label="Status de envio"
-          className="w-48"
+          className="w-full sm:w-48"
           placeholder="Todos"
           options={STATUS_ENVIO.map((s) => ({ valor: s, rotulo: rotularEnum(s) }))}
           value={filtros.status || ""}

@@ -4,7 +4,7 @@ export default function Pagination({ pagina, onMudarPagina }) {
   const { paginaAtual, totalPaginas, totalElementos, primeira, ultima } = pagina;
 
   return (
-    <div className="flex items-center justify-between gap-4 px-1 py-3 text-sm text-ink-700">
+    <div className="flex flex-wrap items-center justify-between gap-3 px-1 py-3 text-sm text-ink-700">
       <span>
         Página <strong className="text-ink-900">{paginaAtual + 1}</strong> de {totalPaginas} ·{" "}
         {totalElementos} registro{totalElementos === 1 ? "" : "s"}
