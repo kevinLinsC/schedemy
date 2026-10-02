@@ -1,11 +1,17 @@
 package br.edu.unisales.schedemy.config;
 
 import br.edu.unisales.schedemy.controller.AgendamentoController;
+import br.edu.unisales.schedemy.controller.AvaliacaoController;
+import br.edu.unisales.schedemy.controller.NotificacaoController;
+import br.edu.unisales.schedemy.controller.RegistroMotivoController;
 import br.edu.unisales.schedemy.controller.BloqueioPeriodoController;
 import br.edu.unisales.schedemy.controller.DisponibilidadeController;
 import br.edu.unisales.schedemy.controller.DuracaoReuniaoController;
 import br.edu.unisales.schedemy.controller.UsuarioController;
 import br.edu.unisales.schedemy.service.AgendamentoService;
+import br.edu.unisales.schedemy.service.AvaliacaoService;
+import br.edu.unisales.schedemy.service.NotificacaoService;
+import br.edu.unisales.schedemy.service.RegistroMotivoService;
 import br.edu.unisales.schedemy.service.BloqueioPeriodoService;
 import br.edu.unisales.schedemy.service.DisponibilidadeService;
 import br.edu.unisales.schedemy.service.DuracaoReuniaoService;
@@ -39,7 +45,10 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
         BloqueioPeriodoController.class,
         DisponibilidadeController.class,
         DuracaoReuniaoController.class,
-        UsuarioController.class
+        UsuarioController.class,
+        AvaliacaoController.class,
+        NotificacaoController.class,
+        RegistroMotivoController.class
 })
 @Import({ SecurityConfig.class, AcessoNegadoJsonHandler.class, br.edu.unisales.schedemy.exception.GlobalExceptionHandler.class })
 class SecurityConfigTest {
@@ -52,6 +61,9 @@ class SecurityConfigTest {
     @MockitoBean private DisponibilidadeService disponibilidadeService;
     @MockitoBean private DuracaoReuniaoService duracaoReuniaoService;
     @MockitoBean private UsuarioService usuarioService;
+    @MockitoBean private AvaliacaoService avaliacaoService;
+    @MockitoBean private NotificacaoService notificacaoService;
+    @MockitoBean private RegistroMotivoService registroMotivoService;
 
     private static final String SENHA_POR_CONTA = "123";
 
@@ -106,7 +118,25 @@ class SecurityConfigTest {
             "admin,         DELETE, /api/v1/usuarios/1",
             "admin,         DELETE, /api/v1/agendamentos/1",
             "admin,         POST,   /api/v1/duracoes-reuniao",
-            "admin,         GET,    /api/v1/bloqueios-periodo"
+            "admin,         GET,    /api/v1/bloqueios-periodo",
+
+            // RF 24: o aluno registra e consulta as proprias avaliacoes.
+            "aluno,         POST,   /api/v1/avaliacoes",
+            "aluno,         GET,    /api/v1/avaliacoes/alunos/1",
+            // A docencia acompanha as avaliacoes (RNF 11).
+            "professor,     GET,    /api/v1/avaliacoes/alunos/1",
+            "coordenador,   GET,    /api/v1/avaliacoes/alunos/1",
+
+            // RF 23: log de notificacoes para a docencia e a administracao.
+            "professor,     GET,    /api/v1/notificacoes",
+            "coordenador,   GET,    /api/v1/notificacoes",
+            "admin,         GET,    /api/v1/notificacoes",
+
+            // RF 11: todos os perfis registram justificativa.
+            "aluno,         POST,   /api/v1/registros-motivo",
+            "recepcionista, POST,   /api/v1/registros-motivo",
+            "professor,     GET,    /api/v1/registros-motivo/agendamentos/1",
+            "aluno,         GET,    /api/v1/registros-motivo/agendamentos/1"
     })
     void devePermitir(String conta, String metodo, String caminho) throws Exception {
         assertThat(statusDe(conta, metodo, caminho))
