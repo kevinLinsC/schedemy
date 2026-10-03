@@ -25,7 +25,7 @@ export default function AuthLayout({ children }) {
           <div className="w-full max-w-sm">{children}</div>
         </div>
 
-        <p className="text-center text-[11px] text-ink-700/50 md:text-left">
+        <p className="hidden text-center text-[11px] text-ink-700/50 md:text-left [@media(min-height:700px)]:block">
           Sistema de agendamentos acadêmicos
         </p>
       </div>

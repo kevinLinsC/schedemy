@@ -78,15 +78,15 @@ export default function CadastroForm({ className = "" }) {
   }
 
   return (
-    <form onSubmit={aoSubmeter} noValidate className={`flex flex-col gap-4 sm:gap-5 ${className}`}>
+    <form onSubmit={aoSubmeter} noValidate className={`flex flex-col gap-3 [@media(min-height:700px)]:gap-4 [@media(min-height:820px)]:gap-5 ${className}`}>
       <div className="flex flex-col items-center gap-1 text-center">
         <h1 className="font-display text-2xl font-bold text-ink-900">Crie sua conta</h1>
-        <p className="text-balance text-sm text-ink-700/70">
+        <p className="hidden text-balance text-sm text-ink-700/70 [@media(min-height:700px)]:block">
           Preencha os dados abaixo para criar sua conta no Schedemy
         </p>
       </div>
 
-      <div className="flex flex-col gap-3">
+      <div className="flex flex-col gap-2.5 sm:gap-3">
         <div>
           <label htmlFor="nome" className="field-label">
             Nome completo
@@ -122,7 +122,7 @@ export default function CadastroForm({ className = "" }) {
           {erros.email ? (
             <p className="field-error">{erros.email}</p>
           ) : (
-            <p className="mt-0.5 text-[11.5px] leading-snug text-ink-700/60">
+            <p className="mt-0.5 hidden text-[11.5px] leading-snug text-ink-700/60 [@media(min-height:700px)]:block">
               Usaremos este endereço para enviar as confirmações de agendamento.
             </p>
           )}
@@ -142,7 +142,7 @@ export default function CadastroForm({ className = "" }) {
           {erros.senha ? (
             <p className="field-error">{erros.senha}</p>
           ) : (
-            <p className="mt-0.5 text-[11.5px] leading-snug text-ink-700/60">
+            <p className="mt-0.5 hidden text-[11.5px] leading-snug text-ink-700/60 [@media(min-height:700px)]:block">
               Deve ter no mínimo {SENHA_MIN} caracteres.
             </p>
           )}

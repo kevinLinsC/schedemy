@@ -26,7 +26,7 @@ export default function LoginForm({ className = "" }) {
   }
 
   return (
-    <form onSubmit={aoSubmeter} className={`flex flex-col gap-4 sm:gap-5 ${className}`}>
+    <form onSubmit={aoSubmeter} className={`flex flex-col gap-3 [@media(min-height:700px)]:gap-4 [@media(min-height:820px)]:gap-5 ${className}`}>
       <div className="flex flex-col items-center gap-1 text-center">
         <h1 className="font-display text-2xl font-bold text-ink-900">Entre na sua conta</h1>
         <p className="text-balance text-sm text-ink-700/70">
@@ -110,10 +110,9 @@ export default function LoginForm({ className = "" }) {
         </p>
       </div>
 
-      {/* Atalho de desenvolvimento: em telas sem altura sobrando ele cede
-          espaco para o formulario, que e o que importa ali. */}
-      <div className="hidden border-t border-ink-100 pt-3 [@media(min-height:660px)]:block">
-        <p className="mb-1.5 text-center text-[11px] font-semibold uppercase tracking-wide text-ink-700/50">
+      {/* Atalhos de acesso usados no dia a dia: ficam sempre visiveis. */}
+      <div className="border-t border-ink-100 pt-2 [@media(min-height:700px)]:pt-3">
+        <p className="mb-1 text-center text-[11px] font-semibold uppercase tracking-wide text-ink-700/50 [@media(min-height:700px)]:mb-1.5">
           Contas de teste
         </p>
         <div className="flex flex-wrap justify-center gap-1.5">
